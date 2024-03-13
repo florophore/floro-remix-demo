@@ -8,6 +8,12 @@ import { getJSON } from "@floro/text-generator";
 import StaticLocaleStorageAccessor from "~/backend/StaticLocalesStorageAccessor";
 import FloroTextStore from "~/backend/FloroTextStore";
 import { getUpdatedText, shortHash } from "~/floro_infra/serverhelpers/text";
+import { SchemaRoot } from "node_modules/@floro/text-generator/dist/types/src/floro-generator-schema-api";
+
+// needed for disabling SSL check on self-hosted cert
+if (process.env.NODE_ENV == "development") {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+}
 
 export async function action({ request }: ActionFunctionArgs) {
   const body = await request.json(); // Parse JSON request body
@@ -60,7 +66,7 @@ export async function action({ request }: ActionFunctionArgs) {
       // In dev you can query your local floro daemon at http://localhost:63403. This allows you to confirm
       // the webhook logic works as expected
       const apiServer =
-        process?.env?.FLORO_API_SERVER ?? "http://localhost:63403";
+        process?.env?.FLORO_API_SERVER ?? "http://127.0.0.1:63403";
       // first we request a link. In prod, the link is a signed url pointing to the floro CDN, in dev it's just
       // a link to your commit state from your floro daemon
       const stateLinkRequest = await fetch(
@@ -69,7 +75,8 @@ export async function action({ request }: ActionFunctionArgs) {
           headers: {
             "floro-api-key": process?.env?.FLORO_API_KEY ?? "",
           },
-        }
+
+        },
       );
       if (!stateLinkRequest) {
         return json(
@@ -79,7 +86,7 @@ export async function action({ request }: ActionFunctionArgs) {
           }
         );
       }
-      const { stateLink } = await stateLinkRequest.json();
+      const { stateLink } = await stateLinkRequest.json() as {stateLink: string};
       if (!stateLink) {
         return json(
           {},
@@ -91,7 +98,7 @@ export async function action({ request }: ActionFunctionArgs) {
       const stateRequest = await fetch(stateLink);
       // We now retrieve the state of the commit. The state is in non-KV form
       // (ie. it is the tree state representation of the commit).
-      const state = await stateRequest.json();
+      const state = await stateRequest.json() as { store: SchemaRoot};
       if (!state?.store?.text) {
         return json(
           {},

@@ -1,8 +1,12 @@
 import { promises as fs } from 'fs';
-import path from 'path';
+import { dirname, join } from 'node:path';
 
-const staticDir = path.join(__dirname, '../../public')
-const localesDir = path.join(staticDir, 'locales');
+// depending on your Typescript settings this may be difference
+// we just want to point to your static assets folder, to a directory
+// called locales
+const projectRoot = dirname(__dirname);
+const staticDir = join(projectRoot, 'public')
+const localesDir = join(staticDir, 'locales');
 
 export default class StaticLocaleStorageAccessor {
 
@@ -12,10 +16,11 @@ export default class StaticLocaleStorageAccessor {
     ): Promise<boolean> {
         try {
             // If using a CDN upload here
-            const filePath = path.join(localesDir, fileName);
+            const filePath = join(localesDir, fileName);
             await fs.writeFile(filePath, Buffer.from(localesJson), {});
             return true;
         } catch(e) {
+            console.log("E", e);
             return false;
         }
 
