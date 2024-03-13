@@ -1664,5 +1664,5 @@ You should include the following setup step in your project documentation
 ```bash
 npm install # or yarn
 npm install -g floro
-floro module sync -b -m rc/app/floro_infra/floro.module.js
+floro module sync -b -m app/floro_infra/floro.module.js
 ```
