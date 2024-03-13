@@ -1523,6 +1523,34 @@ export function meta() {
 
 ```
 
+### Implementing the logic to push to your blob store (e.g. S3)
+
+open `app/backend/StaticLocalesStorageAccessor.ts` and fill in your blob storage upload code. Here is the <a href="https://github.com/florophore/floro-mono/blob/main/packages/storage/src/drivers/AwsStorageDriver.ts">production AWS driver we use on floro.io</a>.
+
+Here is the <a href="https://github.com/florophore/floro-mono/blob/main/packages/storage/src/accessors/LocalesAccessor.ts"> uploader code.</a>
+
+```tsx
+export default class StaticLocaleStorageAccessor {
+
+    public static async writeLocales(
+        fileName: string,
+        localesJson: string
+    ): Promise<boolean> {
+        try {
+            if (process.env.NODE_ENV == "development") {
+              // If using a CDN upload here
+              return true;
+            }
+            const filePath = join(localesDir, fileName);
+            await fs.writeFile(filePath, Buffer.from(localesJson), {});
+            return true;
+        } catch(e) {
+            return false;
+        }
+
+    }
+}
+```
 
 
 ## Remote API Key (Prerequisite)

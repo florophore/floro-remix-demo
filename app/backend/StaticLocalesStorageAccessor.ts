@@ -23,7 +23,6 @@ export default class StaticLocaleStorageAccessor {
             await fs.writeFile(filePath, Buffer.from(localesJson), {});
             return true;
         } catch(e) {
-            console.log("E", e);
             return false;
         }
 
