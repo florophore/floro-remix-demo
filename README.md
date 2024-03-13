@@ -4,6 +4,9 @@ This repository should serve as both a demo and a guide for integrating Floro in
 
 (note: Many of the screen shots are copy/pasted from the next-demo, they are interchangeable for the sake of the demo. Just keep a mental note that it should say remix-demo)
 
+### <a href="https://www.youtube.com/watch?v=8quVOBR1rbU">You can watch the following demo on YouTube to get an idea of how to setup the demo environment</a>
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/8quVOBR1rbU/0.jpg)](https://www.youtube.com/watch?v=8quVOBR1rbU)
 
 ## Getting the Demo to work
 
