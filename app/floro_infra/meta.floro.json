@@ -1,0 +1,21 @@
+{
+  "moduleFile": "floro.module.js",
+  "repositoryId": "2ea037e4-4293-41af-9f2c-811772946bdc",
+  "sha": "f09db3bb19cf8202838d3d16c6c43fd97bab14dfef8db8d367d332f793ff2d9e",
+  "message": "copied next demo into remix",
+  "idx": 0,
+  "generatorDependencies": {
+    "icon-generator": {
+      "icons": "0.0.43"
+    },
+    "themes-generator": {
+      "theme": "0.0.40"
+    },
+    "palette-generator": {
+      "palette": "0.0.39"
+    },
+    "text-generator": {
+      "text": "0.0.32"
+    }
+  }
+}

@@ -10,6 +10,10 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@floro/icon-generator": "^0.0.9",
+    "@floro/palette-generator": "^0.0.7",
+    "@floro/text-generator": "^0.0.23",
+    "@floro/themes-generator": "^0.0.7",
     "@remix-run/node": "^2.8.1",
     "@remix-run/react": "^2.8.1",
     "@remix-run/serve": "^2.8.1",
@@ -18,7 +22,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sort-by": "^1.2.0",
-    "tiny-invariant": "^1.3.1"
+    "tiny-invariant": "^1.3.1",
+    "ts-morph": "^22.0.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.3.1",
